@@ -1,11 +1,25 @@
 {
-    "name": "kennisnet/phpSmbSoapClient",
-    "description": "PHP client for submitting SMO data to Edurep via SOAP.",
-    "homepage": "https://github.com/kennisnet/phpSmbSoapClient",
+    "name": "kennisnet/SmbSoapClient",
+    "description": "In EdurepSearch you can set optional search parameters like a query or the number of records it should return, and perform a query for LOM or SMO records.",
     "license": "MIT",
-    "require": {
-        "php": ">=5.3.0",
-        "ext-soap": "*",
-        "ext-simplexml": "*"
+    "keywords": ["smbSoapClient"],
+    "authors": [
+        {
+            "name": "Wim Muskee",
+            "email": "w.muskee@kennisnet.nl"
+        },
+        {
+            "name": "Sjoerd Huijg",
+            "email": "s.huijg@kennisnet.nl"
+        }
+    ],
+    "require": {},
+    "require-dev": {
+        "phpunit/phpunit": "4.0.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Kennisnet\\SmbSoapClient\\": "src"
+        }
     }
 }

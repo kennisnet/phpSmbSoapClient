@@ -1,5 +1,8 @@
 <?php
-require_once("smbsoapclient.php");
+namespace Some\Other\Namespace;
+
+use Kennisnet\SmbSoapClient;
+
 date_default_timezone_set('Europe/Amsterdam');
 
 $client = new SmbSoapClient( "kennisnet" );
