@@ -354,6 +354,15 @@ class SmbSoapClient extends \SoapClient {
 		if ( !$this->content || !$this->resource ) {
 			throw new UnexpectedValueException( "Provide at least a comment, rating or tag and a resource." );
 		}
+		if (isset($this->smoValues["dtreviewed"])) {
+			if (empty($this->smoValues["dtreviewed"])) {
+				if (!preg_match(self::DATERE, $this->smoValues["dtreviewed"])) {
+					throw new InvalidArgumentException("Not a valid date: " . $this->smoValues["dtreviewed"]);
+				}
+			}
+		} else {
+			throw new InvalidArgumentException("Missing date");
+		}
 		$this->action = "update";
 		$this->createSmoRequest();
 		$xmlVar = new SoapVar( "<ns1:updateSMO>".$this->smo."</ns1:updateSMO>", XSD_ANYXML );
