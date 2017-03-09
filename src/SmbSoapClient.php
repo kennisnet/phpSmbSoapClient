@@ -171,9 +171,22 @@ class SmbSoapClient extends \SoapClient {
 	*/
 	public function setComment( $comment ) {
 		if ( !empty( $comment ) ) {
-			$this->content = TRUE;
-			$this->setParameter( "description", $comment );
+			if ($comment = $this->xmlEscape($comment)) {
+				$this->content = TRUE;
+				$this->setParameter("description", $comment);
+			}
 		}
+	}
+
+	/**
+	 * XML escape reserved characters.
+	 *
+	 * @param $string
+	 * @return mixed
+	 * @todo Use cdata for large strings or strings with many escapable characters.
+	 */
+	private function xmlEscape($string) {
+		return str_replace(array('&', '<', '>', '\'', '"'), array('&amp;', '&lt;', '&gt;', '&apos;', '&quot;'), $string);
 	}
 
 	/**
@@ -340,6 +353,15 @@ class SmbSoapClient extends \SoapClient {
 		}
 		if ( !$this->content || !$this->resource ) {
 			throw new UnexpectedValueException( "Provide at least a comment, rating or tag and a resource." );
+		}
+		if (isset($this->smoValues["dtreviewed"])) {
+			if (empty($this->smoValues["dtreviewed"])) {
+				if (!preg_match(self::DATERE, $this->smoValues["dtreviewed"])) {
+					throw new InvalidArgumentException("Not a valid date: " . $this->smoValues["dtreviewed"]);
+				}
+			}
+		} else {
+			throw new InvalidArgumentException("Missing date");
 		}
 		$this->action = "update";
 		$this->createSmoRequest();
