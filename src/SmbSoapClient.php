@@ -9,7 +9,7 @@ use \DomainException;
 /**
 * PHP package for submitting SMO records via SOAP to Edurep.
 *
-* @version 0.7
+* @version 0.7.1
 * @link http://developers.wiki.kennisnet.nl/index.php/Edurep:Hoofdpagina
 * @example examples/example-insert.php
 * @example examples/example-update.php
@@ -18,7 +18,7 @@ use \DomainException;
 * @author Wim Muskee <wimmuskee@gmail.com>
 * @author S. Huijg <s.huijg@kennisnet.nl>
 *
-* Copyright 2014-2016 Stichting Kennisnet
+* Copyright 2014-2017 Stichting Kennisnet
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files (the "Software"), to deal
@@ -341,6 +341,7 @@ class SmbSoapClient extends \SoapClient {
 		if ( !$this->content || !$this->resource ) {
 			throw new UnexpectedValueException( "Provide at least a comment, rating or tag and a resource." );
 		}
+		# make really sure we have a date before migrating
 		if (isset($this->smoValues["simple"]["dtreviewed"])) {
 			if (empty($this->smoValues["simple"]["dtreviewed"])) {
 				throw new InvalidArgumentException("Empty date");

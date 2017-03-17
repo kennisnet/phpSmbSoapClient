@@ -8,8 +8,12 @@ use Kennisnet\SmbSoapClient;
 * For all SMO's containing the source url in the hreview info,
 * the info is replaced, and smo updated.
 *
-* 2015-2016 Wim Muskee
-* version 1.0
+* 2015-2017
+*
+* Wim Muskee
+* S. Huijg
+*
+* version 1.1
 */
 
 require_once("../phpEdurepSearch/edurepsearch.php");
