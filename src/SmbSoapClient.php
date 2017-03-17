@@ -332,7 +332,7 @@ class SmbSoapClient extends \SoapClient {
 	}
 	
 	/**
-	* Special update for migrations, use set dtreviewd
+	* Special update for migrations
 	*/
 	public function migrate() {
 		if ( empty( $this->smoId ) ) {
@@ -340,6 +340,17 @@ class SmbSoapClient extends \SoapClient {
 		}
 		if ( !$this->content || !$this->resource ) {
 			throw new UnexpectedValueException( "Provide at least a comment, rating or tag and a resource." );
+		}
+		if (isset($this->smoValues["simple"]["dtreviewed"])) {
+			if (empty($this->smoValues["simple"]["dtreviewed"])) {
+				throw new InvalidArgumentException("Empty date");
+			} else {
+				if (!preg_match(self::DATERE, $this->smoValues["simple"]["dtreviewed"])) {
+					throw new InvalidArgumentException("Not a valid date: " . $this->smoValues["simple"]["dtreviewed"]);
+				}
+			}
+		} else {
+			throw new InvalidArgumentException("Missing date");
 		}
 		$this->action = "update";
 		$this->createSmoRequest();
