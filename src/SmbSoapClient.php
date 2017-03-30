@@ -9,7 +9,7 @@ use \DomainException;
 /**
 * PHP package for submitting SMO records via SOAP to Edurep.
 *
-* @version 0.7.1
+* @version 0.7.2
 * @link http://developers.wiki.kennisnet.nl/index.php/Edurep:Hoofdpagina
 * @example examples/example-insert.php
 * @example examples/example-update.php
@@ -160,7 +160,7 @@ class SmbSoapClient extends \SoapClient {
 	public function setResource( $uri ) {
 		if ( preg_match( self::URNRE, $uri ) || preg_match( self::URLRE, $uri ) ) {
 			$this->resource = TRUE;
-			$this->setParameter( "info", $uri );
+			$this->setParameter( "info", htmlentities( $uri ) );
 		}
 	}
 
