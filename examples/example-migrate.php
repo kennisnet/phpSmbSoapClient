@@ -1,6 +1,7 @@
 <?php
-namespace Some\Other\Name;
-use Kennisnet\SmbSoapClient;
+# for execution in the composer root dir with kennisnet/smbsoapclient required
+require __DIR__ . '/vendor/autoload.php';
+use Kennisnet\SmbSoapClient\SmbSoapClient;
 
 /**
 * Mapping SMO's from one info url to another.
