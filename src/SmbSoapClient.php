@@ -46,8 +46,9 @@ class SmbSoapClient extends \SoapClient {
 	const WSDL_STAGING = "http://wsdl.kennisnet.nl/smd/1.0/smd-staging.wsdl";
 
 	# regular expressions
-	const URLRE = "/^([a-z][a-z0-9\*\-\.]*):\/\/(?:(?:(?:[\w\.\-\+!$&'\(\)*\+,;=]|%[0-9a-f]{2})+:)*(?:[\w\.\-\+%!$&'\(\)*\+,;=]|%[0-9a-f]{2})+@)?(?:(?:[a-z0-9\-\.]|%[0-9a-f]{2})+|(?:\[(?:[0-9a-f]{0,4}:)*(?:[0-9a-f]{0,4})\]))(?::[0-9]+)?(?:[\/|\?](?:[\w#!:\.\?\+=&@!$'~*,;\/\(\)\[\]\-]|%[0-9a-f]{2})*)?$/";
+	const IRIRE = "/^([a-z][a-z0-9\*\-\.]*):\/\/(?:(?:(?:[\w\.\-\+!$&'\(\)*\+,;=]|%[0-9a-f]{2})+:)*(?:[\w\.\-\+%!$&'\(\)*\+,;=]|%[0-9a-f]{2})+@)?(?:(?:[a-z0-9\-\.]|%[0-9a-f]{2})+|(?:\[(?:[0-9a-f]{0,4}:)*(?:[0-9a-f]{0,4})\]))(?::[0-9]+)?(?:[\/|\?](?:[\pP\pS\pC\w#!:\.\?\+=&@!$'~*,;\/\(\)\[\]\-]|%[0-9a-f]{2})*)?$/u";
 	const URNRE = '/^urn:[a-z0-9][a-z0-9-]{1,31}:([a-z0-9()+,-.:=@;$_!*\']|%(0[1-9a-f]|[1-9a-f][0-9a-f]))+$/i';
+	const URINAMERE = '/^[a-z0-9][a-z0-9-\+\.]+:[A-Za-z0-9][A-Za-z0-9-\._\(\)]+(?::[a-zA-Z0-9-]+)?$/';
 	const DATERE = '/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(Z|(\+|-)\d{2}:\d{2})$/';
 
 	# checks if needed vars have been inserted
@@ -115,6 +116,27 @@ class SmbSoapClient extends \SoapClient {
 		parent::__construct( $this->wsdl, array_merge ( $this->soapOptions, $soapOptions ) );
 	}
 
+	/**
+	* See if a resource complies to IRI, URI name, or URN.
+	* This method can be used to validate LOM record resources to see which one should be used
+	* in the SMO. Use the validate order: catalogentries (regardless of catalog) -> technical location.
+	*
+	* These might not be complete, but match current (2017-10-05) Edurep matching. We would rather use
+	* a proper RFC3986/RFC3987 validator, but waiting for proper PHP7 support.
+	* @param string $resource Resource to set.
+	* @see https://github.com/fkooman/php-urn-validator
+	* @see http://archive.mattfarina.com/2009/01/08/rfc-3986-url-validation/
+	* @see http://fusion.cs.uni-jena.de/fusion/blog/2016/11/18/iri-uri-url-urn-and-their-differences/
+	*/
+	public function validateResource( $resource ) {
+		if ( preg_match( self::URNRE, $resource ) || preg_match( self::IRIRE, $resource ) || preg_match( self::URINAMERE, $resource ) ) {
+			return TRUE;
+		}
+		else {
+			return FALSE;
+		}
+	}
+
 	#------------------
 	# Set SMO variables
 	#------------------
@@ -151,14 +173,12 @@ class SmbSoapClient extends \SoapClient {
 	}
 
 	/**
-	* Check if input is URI by seeing if it is either a URN or URL.
+	* Check if input is a valid resource and set info.
 	*
 	* @param string $uri URI to set.
-	* @see https://github.com/fkooman/php-urn-validator
-	* @see http://archive.mattfarina.com/2009/01/08/rfc-3986-url-validation/
 	*/
 	public function setResource( $uri ) {
-		if ( preg_match( self::URNRE, $uri ) || preg_match( self::URLRE, $uri ) ) {
+		if ( $this->validateResource($uri) ) {
 			$this->resource = TRUE;
 			$this->setParameter( "info", htmlentities( $uri ) );
 		}
