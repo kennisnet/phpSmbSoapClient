@@ -20,7 +20,9 @@ class SmbSoapClientTest extends TestCase
             'ftp://ftp.is.co.za/rfc/rfc1808.txt' => true,
             'http://www.ietf.org/rfc/rfc2396.txt' => true,
             'urn:oasis:names:specification:docbook:dtd:xml:4.1.2' => true,
-            'http://www.FyLitCl7Pf7kjQdDUOLQOuaxTXbj5iNG.com' => false
+            'http://www.FyLitCl7Pf7kjQdDUOLQOuaxTXbj5iNG.com' => false,
+            'http://nl.wikipedia.org/wiki/Luis_Alberto_Suárez' => true,
+            'http://nl.wikipedia.org/wiki/†_(album' => true
         ];
 
         $results = [];
