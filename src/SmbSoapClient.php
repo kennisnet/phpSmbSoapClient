@@ -9,7 +9,7 @@ use \DomainException;
 /**
 * PHP package for submitting SMO records via SOAP to Edurep.
 *
-* @version 0.7.2
+* @version 0.8.0
 * @link http://developers.wiki.kennisnet.nl/index.php/Edurep:Hoofdpagina
 * @example examples/example-insert.php
 * @example examples/example-update.php
