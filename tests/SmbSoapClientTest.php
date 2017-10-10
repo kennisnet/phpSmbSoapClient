@@ -8,8 +8,6 @@ class SmbSoapClientTest extends TestCase
 {
     public function testResourceValidator()
     {
-        $client = new SmbSoapClient('supplierId');
-
         $uris = [
             'test' => false,
             'k-:publicatie:5141' => true,
@@ -28,7 +26,7 @@ class SmbSoapClientTest extends TestCase
         $results = [];
 
         foreach ($uris as $uri => $expectedResult) {
-            $result = $client->validateResource($uri);
+            $result = SmbSoapClient::validateResource($uri);
 
             $results[$uri] = $result;
         }
