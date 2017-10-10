@@ -9,7 +9,7 @@ use \DomainException;
 /**
 * PHP package for submitting SMO records via SOAP to Edurep.
 *
-* @version 0.8.0
+* @version 0.8.1
 * @link http://developers.wiki.kennisnet.nl/index.php/Edurep:Hoofdpagina
 * @example examples/example-insert.php
 * @example examples/example-update.php
@@ -17,6 +17,7 @@ use \DomainException;
 * @example examples/example-migrate.php
 * @author Wim Muskee <wimmuskee@gmail.com>
 * @author S. Huijg <s.huijg@kennisnet.nl>
+* @author Olivier Droog <olivier1980@gmail.com>
 *
 * Copyright 2014-2017 Stichting Kennisnet
 *
