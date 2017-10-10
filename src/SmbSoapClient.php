@@ -128,7 +128,7 @@ class SmbSoapClient extends \SoapClient {
 	* @see http://archive.mattfarina.com/2009/01/08/rfc-3986-url-validation/
 	* @see http://fusion.cs.uni-jena.de/fusion/blog/2016/11/18/iri-uri-url-urn-and-their-differences/
 	*/
-	public function validateResource( $resource ) {
+	public static function validateResource( $resource ) {
 		if ( preg_match( self::URNRE, $resource ) || preg_match( self::IRIRE, $resource ) || preg_match( self::URINAMERE, $resource ) ) {
 			return TRUE;
 		}
@@ -178,7 +178,7 @@ class SmbSoapClient extends \SoapClient {
 	* @param string $uri URI to set.
 	*/
 	public function setResource( $uri ) {
-		if ( $this->validateResource($uri) ) {
+		if ( self::validateResource($uri) ) {
 			$this->resource = TRUE;
 			$this->setParameter( "info", htmlentities( $uri ) );
 		}
