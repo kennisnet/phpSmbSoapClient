@@ -9,7 +9,7 @@ use \DomainException;
 /**
 * PHP package for submitting SMO records via SOAP to Edurep.
 *
-* @version 0.8.1
+* @version 0.8.2
 * @link http://developers.wiki.kennisnet.nl/index.php/Edurep:Hoofdpagina
 * @example examples/example-insert.php
 * @example examples/example-update.php
@@ -231,7 +231,7 @@ class SmbSoapClient extends \SoapClient {
 				$tag["worst"] = $worst;
 				$tag["best"] = $best;
 			}
-			if ( preg_match( self::URLRE, $ref ) ) {
+			if ( preg_match( self::IRIRE, $ref ) ) {
 				$tag["ref"] = $ref;
 			}
 			$this->smoValues["complex"]["tags"][] = $tag;
@@ -291,7 +291,7 @@ class SmbSoapClient extends \SoapClient {
 		if ( !empty( $description ) ) {
 			$this->smoValues["complex"]["license"]["description"] = $description;
 
-			if ( preg_match( self::URLRE, $ref ) ) {
+			if ( preg_match( self::IRIRE, $ref ) ) {
 				$this->smoValues["complex"]["license"]["ref"] = $ref;
 			}
 		}
