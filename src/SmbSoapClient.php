@@ -117,6 +117,15 @@ class SmbSoapClient extends \SoapClient {
 		parent::__construct( $this->wsdl, array_merge ( $this->soapOptions, $soapOptions ) );
 	}
 
+    /**
+	 * Return the currently used WSDL address
+     * @return string
+     */
+	public function getWsdl()
+	{
+		return $this->wsdl;
+	}
+
 	/**
 	* See if a resource complies to IRI, URI name, or URN.
 	* This method can be used to validate LOM record resources to see which one should be used
