@@ -9,7 +9,7 @@ use \DomainException;
 /**
 * PHP package for submitting SMO records via SOAP to Edurep.
 *
-* @version 0.8.2
+* @version 0.8.3
 * @link http://developers.wiki.kennisnet.nl/index.php/Edurep:Hoofdpagina
 * @example examples/example-insert.php
 * @example examples/example-update.php
@@ -19,7 +19,7 @@ use \DomainException;
 * @author S. Huijg <s.huijg@kennisnet.nl>
 * @author Olivier Droog <olivier1980@gmail.com>
 *
-* Copyright 2014-2017 Stichting Kennisnet
+* Copyright 2014-2020 Stichting Kennisnet
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files (the "Software"), to deal
@@ -42,9 +42,9 @@ use \DomainException;
 
 class SmbSoapClient extends \SoapClient {
 	# soap client options
-	private $wsdl = "http://wsdl.kennisnet.nl/smd/1.0/smd.wsdl";
+	private $wsdl = "https://wsdl.kennisnet.nl/smd/1.0/smd.wsdl";
 	private $soapOptions = array( "trace" => 1 );
-	const WSDL_STAGING = "http://wsdl.kennisnet.nl/smd/1.0/smd-staging.wsdl";
+	const WSDL_STAGING = "https://wsdl.kennisnet.nl/smd/1.0/smd-staging.wsdl";
 
 	# regular expressions
 	const IRIRE = "/^([a-z][a-z0-9\*\-\.]*):\/\/(?:(?:(?:[\w\.\-\+!$&'\(\)*\+,;=]|%[0-9a-f]{2})+:)*(?:[\w\.\-\+%!$&'\(\)*\+,;=]|%[0-9a-f]{2})+@)?(?:(?:[a-z0-9\-\.]|%[0-9a-f]{2})+|(?:\[(?:[0-9a-f]{0,4}:)*(?:[0-9a-f]{0,4})\]))(?::[0-9]+)?(?:[\/|\?](?:[\pP\pS\pC\w#!:\.\?\+=&@!$'~*,;\/\(\)\[\]\-]|%[0-9a-f]{2})*)?$/u";
