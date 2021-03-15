@@ -9,7 +9,7 @@ use \DomainException;
 /**
 * PHP package for submitting SMO records via SOAP to Edurep.
 *
-* @version 0.8.4
+* @version 0.8.5
 * @link http://developers.wiki.kennisnet.nl/index.php/Edurep:Hoofdpagina
 * @example examples/example-insert.php
 * @example examples/example-update.php
@@ -19,7 +19,7 @@ use \DomainException;
 * @author S. Huijg <s.huijg@kennisnet.nl>
 * @author Olivier Droog <olivier1980@gmail.com>
 *
-* Copyright 2014-2020 Stichting Kennisnet
+* Copyright 2014-2021 Stichting Kennisnet
 *
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files (the "Software"), to deal
@@ -49,7 +49,7 @@ class SmbSoapClient extends \SoapClient {
 	# regular expressions
 	const IRIRE = "/^([a-z][a-z0-9\*\-\.]*):\/\/(?:(?:(?:[\w\.\-\+!$&'\(\)*\+,;=]|%[0-9a-f]{2})+:)*(?:[\w\.\-\+%!$&'\(\)*\+,;=]|%[0-9a-f]{2})+@)?(?:(?:[a-z0-9\-\.]|%[0-9a-f]{2})+|(?:\[(?:[0-9a-f]{0,4}:)*(?:[0-9a-f]{0,4})\]))(?::[0-9]+)?(?:[\/|\?](?:[\pP\pS\pC\w#!:\.\?\+=&@!$'~*,;\/\(\)\[\]\-]|%[0-9a-f]{2})*)?$/u";
 	const URNRE = '/^urn:[a-z0-9][a-z0-9-]{1,31}:([a-z0-9()+,-.:=@;$_!*\']|%(0[1-9a-f]|[1-9a-f][0-9a-f]))+$/i';
-	const URINAMERE = '/^[a-z0-9][a-z0-9-\+\.]+:[A-Za-z0-9][A-Za-z0-9-\._\(\)]+(?::[a-zA-Z0-9-]+)?$/';
+	const URINAMERE = '/^[a-z0-9][a-z0-9-\+\.]+:[A-Za-z0-9][A-Za-z0-9-\._\(\)]+(:[a-zA-Z0-9-]+)*$/';
 	const DATERE = '/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(Z|(\+|-)\d{2}:\d{2})$/';
 
 	# checks if needed vars have been inserted
