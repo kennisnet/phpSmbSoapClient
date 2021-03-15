@@ -11,6 +11,7 @@ class SmbSoapClientTest extends TestCase
         $uris = [
             'test' => false,
             'k-:publicatie:5141' => true,
+            'oai:www.greeni.nl:VBS:2:146632' => true,
             'kennislink:publicatie:reree' => true,
             'http://www.kennislink.nl/publicaties/slimme-auto-plooit-zich-naar-botsing' => true,
             'urn:uuid:3722d659-80fe-4215-9502-cfea6e8272e6' => true,
