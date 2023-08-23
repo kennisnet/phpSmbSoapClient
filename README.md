@@ -1,4 +1,3 @@
-[![Build Status](https://travis-ci.org/kennisnet/phpSmbSoapClient.svg?branch=master)](https://travis-ci.org/kennisnet/phpSmbSoapClient)
 
 # phpSmbSoapClient
 This is a PHP client for submitting SMO data to Edurep via SOAP.
